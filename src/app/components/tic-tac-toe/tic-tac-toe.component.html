@@ -1,0 +1,13 @@
+<mat-card>
+    <div fxLayout="column">
+        <div fxLayout="row" *ngFor="let row of gameBoard; let i=index">
+            <div *ngFor="let cell of row; let j=index">
+                <button mat-icon-button (click)="onCellClick(i,j)">
+                    <mat-icon *ngIf="cell == gridCell.O">panorama_fish_eye</mat-icon>
+                    <mat-icon *ngIf="cell == gridCell.X">close</mat-icon>
+                    <mat-icon *ngIf="cell == gridCell.EMPTY">crop_square</mat-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+</mat-card>

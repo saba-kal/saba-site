@@ -1,0 +1,6 @@
+mat-sidenav {
+    width: 200px;
+}
+.sidenav-container {
+    z-index: -1 !important;
+}
