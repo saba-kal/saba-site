@@ -6,6 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Saba\'s Personal Website';
   sidenavOpened: boolean = true;
 }

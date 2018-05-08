@@ -1,13 +1,32 @@
-<mat-card>
-    <div fxLayout="column">
-        <div fxLayout="row" *ngFor="let row of gameBoard; let i=index">
-            <div *ngFor="let cell of row; let j=index">
-                <button mat-icon-button (click)="onCellClick(i,j)">
-                    <mat-icon *ngIf="cell == gridCell.O">panorama_fish_eye</mat-icon>
-                    <mat-icon *ngIf="cell == gridCell.X">close</mat-icon>
-                    <mat-icon *ngIf="cell == gridCell.EMPTY">crop_square</mat-icon>
-                </button>
+
+<div fxLayout="row" fxLayoutGap="20px">
+
+    <!--Board-->
+    <div fxLayout="column" class="game-board">
+        <div fxLayout="row" fxFlex="100%" *ngFor="let row of gameBoard; let i=index">
+            <div 
+            fxFlex="100%" 
+            *ngFor="let cell of row; let j=index" 
+            (click)="onCellClick(i,j)"
+            [ngClass]="{'grid-cell':true, 'winning-cell': cell.winner}">
+                <mat-icon class="game-icon" *ngIf="cell.symbol == gameSymbol.O">panorama_fish_eye</mat-icon>
+                <mat-icon class="game-icon" *ngIf="cell.symbol == gameSymbol.X">close</mat-icon>
+                <mat-icon class="game-icon" *ngIf="cell.symbol == gameSymbol.EMPTY"></mat-icon>
             </div>
         </div>
+        <span class="block-grid" *ngIf="lockBoard"></span>
     </div>
-</mat-card>
+    
+    <!-- Right side -->
+    <div>
+        <div>It is currently player {{activePlayer}}'s turn</div>
+        <div *ngIf="lockBoard">Game over. reset board to continue</div>
+    </div>
+
+</div>
+
+<br>
+
+<div style="text-align: center">
+    <button mat-button (click)="resetBoard()">Reset Board</button>
+</div>

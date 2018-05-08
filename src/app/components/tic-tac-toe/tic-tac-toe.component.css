@@ -1,0 +1,32 @@
+.grid-cell{
+    /* padding: 12.5% 0;
+    text-align: center; */
+    border:1px solid #000000;
+    cursor: pointer;
+}
+.grid-cell:hover:not(.winning-cell){
+    background-color: rgb(224, 224, 224);
+}
+.grid-cell:active:not(.winning-cell){
+    background-color: rgb(189, 189, 189);
+}
+.winning-cell{
+    background-color: goldenrod;
+}
+.game-icon{
+    font-size: 30pt;
+    top: 50%;
+    left: 50%;
+    transform: translate(50%, 50%);
+}
+.game-board{
+    height: 200px;
+    width: 200px;
+    outline: 8px solid #ffffff;
+    outline-offset: -5px;
+}
+.block-grid {
+    position: absolute;
+    height: 200px;
+    width: 200px; 
+}

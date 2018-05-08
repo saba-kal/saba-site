@@ -1,39 +1,57 @@
 import { Injectable } from '@angular/core';
-import { Observable , of } from 'rxjs'
+import { BehaviorSubject } from 'rxjs'
 
-export enum GridCell {
+export enum GameSymbol {
     EMPTY,
     X,
     O
 }
 
+export interface GridCell {
+    symbol: GameSymbol,
+    winner: boolean
+}
+
 @Injectable()
 export class TicTacToeService {
 
-    board: GridCell[][] = [
-        [GridCell.EMPTY, GridCell.EMPTY, GridCell.EMPTY],
-        [GridCell.EMPTY, GridCell.EMPTY, GridCell.EMPTY],
-        [GridCell.EMPTY, GridCell.EMPTY, GridCell.EMPTY]
-    ];
-    
-    activePlayer = GridCell.X;
+    board: GridCell[][] = [];
+    activePlayer: GameSymbol = GameSymbol.X;
 
-    constructor() { }
-
-    getBoard(): Observable<GridCell[][]> {
-        return of(this.board);
+    constructor() {
+        for (let i = 0; i < 3; i++) {
+            this.board.push([]);
+            for (let j = 0; j < 3; j++){
+                this.board[i].push({symbol: GameSymbol.EMPTY, winner: false});
+            }
+        }
     }
 
-    getActivePlayer(): Observable<any>{
-        return of(this.activePlayer);
+    getBoard(): GridCell[][] {
+        return this.board
+    }
+
+    getActivePlayer(): GameSymbol{
+        return this.activePlayer;
     }
 
     changeCell(row, col){
-        this.board[row][col] = this.activePlayer;
+        this.board[row][col].symbol = this.activePlayer;
         switch(this.activePlayer){
-            case GridCell.O: this.activePlayer = GridCell.X; break;
-            case GridCell.X: this.activePlayer = GridCell.O; break;
-            case GridCell.EMPTY: this.activePlayer = GridCell.O; break;
+            case GameSymbol.O: this.activePlayer = GameSymbol.X; break;
+            case GameSymbol.X: this.activePlayer = GameSymbol.O; break;
+            case GameSymbol.EMPTY: this.activePlayer = GameSymbol.O; break;
         }
+    }
+
+    resetBoard(){
+        this.board = [];
+        for (let i = 0; i < 3; i++) {
+            this.board.push([]);
+            for (let j = 0; j < 3; j++){
+                this.board[i].push({symbol: GameSymbol.EMPTY, winner: false});
+            }
+        }
+        this.activePlayer = GameSymbol.X;
     }
 }
