@@ -11,7 +11,8 @@ export class TicTacToeComponent implements OnInit {
 
     gameSymbol = GameSymbol; //Store reference to GameSymbol enum so we can use it in the template
     gameBoard: GridCell[][];
-    activePlayer: GameSymbol;
+    player: GameSymbol = GameSymbol.X;
+    opponent: GameSymbol = GameSymbol.O;
     lockBoard: boolean;
 
     constructor(private _ticTacToeService: TicTacToeService) { }
@@ -24,25 +25,34 @@ export class TicTacToeComponent implements OnInit {
     ngOnInit() {
         //Get board
         this.gameBoard = this._ticTacToeService.getBoard();
-        //Get active player
-        this.activePlayer = this._ticTacToeService.getActivePlayer();
     }
 
     /**
-     * Change cell on click if it is empty
+     * Change cell on click if it is empty. Then, let the AI make move
      * @param row Row number
      * @param col Column number
      */
     onCellClick(row, col){
         if (this.gameBoard[row][col].symbol == GameSymbol.EMPTY){
-            this._ticTacToeService.changeCell(row, col);
-            this.activePlayer = this._ticTacToeService.getActivePlayer();
-            this.checkWin();
+            //Player makes move
+            this.gameBoard[row][col].symbol = this.player;
+            //Player won or no moves left
+            if (this.checkWin() == 10 || !this.checkMovesLeft()){
+                this.lockBoard = true;
+                return;
+            }
+            //AI makes move
+            this.makeBestMove();
+            //AI won or no moves left
+            if (this.checkWin() == -10 || !this.checkMovesLeft()){
+                this.lockBoard = true;
+                return;
+            }
         }
     }
 
     /**
-     * Make all gridcells empty
+     * Make all grid cells empty
      */
     resetBoard(){
         this._ticTacToeService.resetBoard();
@@ -56,57 +66,142 @@ export class TicTacToeComponent implements OnInit {
      * Check for the win condition
      */
     checkWin(){
-        //Ceck row
+        //Check row
         for (let i = 0; i < this.gameBoard.length; i++) {
             if(this.gameBoard[i][0].symbol == this.gameBoard[i][1].symbol &&
-            this.gameBoard[i][1].symbol == this.gameBoard[i][2].symbol &&
-            this.gameBoard[i][0].symbol != GameSymbol.EMPTY){
-                this.gameBoard[i][0].winner=true;
-                this.gameBoard[i][1].winner=true;
-                this.gameBoard[i][2].winner=true;
-                this.lockBoard = true;
+            this.gameBoard[i][1].symbol == this.gameBoard[i][2].symbol){
+                //Return state evaluation
+                if (this.gameBoard[i][0].symbol == this.player)
+                    return 10;
+                else if (this.gameBoard[i][0].symbol == this.opponent)
+                    return -10;
             }
         }
-        //Ceck column
+        //Check column
         for (let i = 0; i < this.gameBoard[0].length; i++) {
             if(this.gameBoard[0][i].symbol == this.gameBoard[1][i].symbol &&
-            this.gameBoard[1][i].symbol == this.gameBoard[2][i].symbol &&
-            this.gameBoard[0][i].symbol != GameSymbol.EMPTY){
-                this.gameBoard[0][i].winner=true;
-                this.gameBoard[1][i].winner=true;
-                this.gameBoard[2][i].winner=true;
-                this.lockBoard = true;
+            this.gameBoard[1][i].symbol == this.gameBoard[2][i].symbol){
+                if (this.gameBoard[0][i].symbol == this.player)
+                    return 10;
+                else if (this.gameBoard[0][i].symbol == this.opponent)
+                    return -10;
             }
         }
-         // 1st diagonal
+        // 1st diagonal
         if(this.gameBoard[0][0].symbol == this.gameBoard[1][1].symbol && 
-        this.gameBoard[1][1].symbol == this.gameBoard[2][2].symbol && 
-        this.gameBoard[0][0].symbol != GameSymbol.EMPTY){
-            this.gameBoard[0][0].winner=true;
-            this.gameBoard[1][1].winner=true;
-            this.gameBoard[2][2].winner=true;
-            this.lockBoard = true;
+        this.gameBoard[1][1].symbol == this.gameBoard[2][2].symbol){
+            if (this.gameBoard[0][0].symbol == this.player)
+                return 10;
+            else if (this.gameBoard[0][0].symbol == this.opponent)
+                return -10;
         }
         // 2nd diagonal
         if(this.gameBoard[0][2].symbol == this.gameBoard[1][1].symbol && 
-        this.gameBoard[1][1].symbol == this.gameBoard[2][0].symbol && 
-        this.gameBoard[0][2].symbol != GameSymbol.EMPTY){
-            this.gameBoard[0][2].winner=true;
-            this.gameBoard[1][1].winner=true;
-            this.gameBoard[2][0].winner=true;
-            this.lockBoard = true;
+        this.gameBoard[1][1].symbol == this.gameBoard[2][0].symbol){
+            if (this.gameBoard[0][2].symbol == this.player)
+                return 10;
+            else if (this.gameBoard[0][2].symbol == this.opponent)
+                return -10;
         }
-        //Check if there are no moves left
-        let count = 0;
+        //No one has won, so return 0
+        return 0;
+    }
+
+    /**
+     * Check if there are any moves left on the board.
+     */
+    checkMovesLeft(){
         for (let i = 0; i < this.gameBoard.length; i++) {
             for (let j = 0; j < this.gameBoard[i].length; j++) {
                 if (this.gameBoard[i][j].symbol == GameSymbol.EMPTY){
-                    count++;
+                    return true;
                 }
             }
         }
-        if (count == 0){
-            this.lockBoard = true;
+        return false;
+    }
+
+    /**
+     * Minimax function. Considers all moves and evaluates the value of the board
+     * @param depth The depth of each node in the game tree
+     * @param isMax Is it Max's or Min's move
+     */
+    minimax(depth: number, isMax: boolean){
+        let score = this.checkWin();
+        // Max won game
+        if (score == 10) return score;
+        // Min won game
+        if (score == -10) return score;
+        // Tie game
+        if (!this.checkMovesLeft()) return 0;
+        // Max's move
+        if (isMax){
+            let best = -9999;
+            // Traverse the board and make all possible moves
+            for (let i = 0; i < this.gameBoard.length; i++) {
+                for (let j = 0; j < this.gameBoard[i].length; j++) {
+                    if (this.gameBoard[i][j].symbol == GameSymbol.EMPTY){
+                        //Make move
+                        this.gameBoard[i][j].symbol = this.player;
+                        //Recursively find maximum value
+                        best = Math.max(best, this.minimax(depth+1, !isMax))
+                        //Undo move
+                        this.gameBoard[i][j].symbol = GameSymbol.EMPTY;
+                    }
+                }
+            }
+            return best;
         }
+        // Min's move
+        if (!isMax){
+            let best = 9999;
+            // Traverse the board and make all possible moves
+            for (let i = 0; i < this.gameBoard.length; i++) {
+                for (let j = 0; j < this.gameBoard[i].length; j++) {
+                    if (this.gameBoard[i][j].symbol == GameSymbol.EMPTY){
+                        //Make move
+                        this.gameBoard[i][j].symbol = this.opponent;
+                        //Recursively find minimum value
+                        best = Math.min(best, this.minimax(depth+1, !isMax))
+                        //Undo move
+                        this.gameBoard[i][j].symbol = GameSymbol.EMPTY;
+                    }
+                }
+            }
+            return best;
+        }
+    }
+
+    /**
+     * AI makes the best possible move
+     */
+    makeBestMove(){
+        let bestMove = 9999;
+        let row = -1;
+        let col = -1;
+        //Traverse all cells on board
+        for (let i = 0; i < this.gameBoard.length; i++) {
+            for (let j = 0; j < this.gameBoard[i].length; j++) {
+                if (this.gameBoard[i][j].symbol == GameSymbol.EMPTY){
+                    //Make min's move on empty cell
+                    this.gameBoard[i][j].symbol = this.opponent;
+                    //Evaluate max's options
+                    let moveVal = this.minimax(0, true);
+                    //Undo move
+                    this.gameBoard[i][j].symbol = GameSymbol.EMPTY;
+                    console.log("Move Value ("+i+", "+j+") = "+moveVal+", Best Move Value = "+bestMove);
+                    //If the moveVal is less than max's best move, update the best move
+                    //We want to minimize max's ability to win
+                    if (moveVal < bestMove)
+                    {
+                        bestMove = moveVal;
+                        row = i;
+                        col = j;
+                    }
+                }
+            }
+        }
+        //Make the move
+        this.gameBoard[row][col].symbol = this.opponent;
     }
 }
