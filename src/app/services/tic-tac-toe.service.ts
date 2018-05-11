@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs'
 
 export enum GameSymbol {
-    EMPTY,
-    X,
-    O
+    EMPTY = 'Empty',
+    X = 'X',
+    O = 'O'
 }
 
 export interface GridCell {

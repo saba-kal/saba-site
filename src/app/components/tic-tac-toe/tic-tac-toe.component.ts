@@ -14,6 +14,7 @@ export class TicTacToeComponent implements OnInit {
     player: GameSymbol = GameSymbol.X;
     opponent: GameSymbol = GameSymbol.O;
     lockBoard: boolean;
+    message: string = "Click or tap any square to start playing";
 
     constructor(private _ticTacToeService: TicTacToeService) { }
 
@@ -39,6 +40,7 @@ export class TicTacToeComponent implements OnInit {
             //Player won or no moves left
             if (this.checkWin() == 10 || !this.checkMovesLeft()){
                 this.lockBoard = true;
+                this.checkWin(true); //Highlight winner
                 return;
             }
             //AI makes move
@@ -46,6 +48,7 @@ export class TicTacToeComponent implements OnInit {
             //AI won or no moves left
             if (this.checkWin() == -10 || !this.checkMovesLeft()){
                 this.lockBoard = true;
+                this.checkWin(true); //Highlight winner.
                 return;
             }
         }
@@ -57,6 +60,7 @@ export class TicTacToeComponent implements OnInit {
     resetBoard(){
         this._ticTacToeService.resetBoard();
         this.lockBoard = false;
+        this.message = "Click or tap any square to start playing";
         //For some reason, the board does not automatically update. Subscriptions don't seem to work either
         //TODO: Figure out why and remove the line below
         this.gameBoard = this._ticTacToeService.getBoard();
@@ -64,16 +68,24 @@ export class TicTacToeComponent implements OnInit {
 
     /**
      * Check for the win condition
+     * @param showResult highlight winning squares and indicate the winner in a message
      */
-    checkWin(){
+    checkWin(showResult: boolean = false){
         //Check row
         for (let i = 0; i < this.gameBoard.length; i++) {
             if(this.gameBoard[i][0].symbol == this.gameBoard[i][1].symbol &&
             this.gameBoard[i][1].symbol == this.gameBoard[i][2].symbol){
+                let winner = this.gameBoard[i][0].symbol
+                if (showResult){
+                    this.gameBoard[i][0].winner = true;
+                    this.gameBoard[i][1].winner = true;
+                    this.gameBoard[i][2].winner = true;
+                    this.message = "Game over. The winner is " + winner + ". Press reset to play again";
+                }
                 //Return state evaluation
-                if (this.gameBoard[i][0].symbol == this.player)
+                if (winner == this.player)
                     return 10;
-                else if (this.gameBoard[i][0].symbol == this.opponent)
+                else if (winner == this.opponent)
                     return -10;
             }
         }
@@ -81,29 +93,52 @@ export class TicTacToeComponent implements OnInit {
         for (let i = 0; i < this.gameBoard[0].length; i++) {
             if(this.gameBoard[0][i].symbol == this.gameBoard[1][i].symbol &&
             this.gameBoard[1][i].symbol == this.gameBoard[2][i].symbol){
-                if (this.gameBoard[0][i].symbol == this.player)
+                let winner = this.gameBoard[0][i].symbol
+                if (showResult){
+                    this.gameBoard[0][i].winner = true;
+                    this.gameBoard[1][i].winner = true;
+                    this.gameBoard[2][i].winner = true;
+                    this.message = "Game over. The winner is " + winner + ". Press reset to play again";
+                }
+                if (winner == this.player)
                     return 10;
-                else if (this.gameBoard[0][i].symbol == this.opponent)
+                else if (winner == this.opponent)
                     return -10;
             }
         }
         // 1st diagonal
         if(this.gameBoard[0][0].symbol == this.gameBoard[1][1].symbol && 
         this.gameBoard[1][1].symbol == this.gameBoard[2][2].symbol){
-            if (this.gameBoard[0][0].symbol == this.player)
+            let winner = this.gameBoard[0][0].symbol
+            if (showResult){
+                this.gameBoard[0][0].winner = true;
+                this.gameBoard[1][1].winner = true;
+                this.gameBoard[2][2].winner = true;
+                this.message = "Game over. The winner is " + winner + ". Press reset to play again";
+            }
+            if (winner == this.player)
                 return 10;
-            else if (this.gameBoard[0][0].symbol == this.opponent)
+            else if (winner == this.opponent)
                 return -10;
         }
         // 2nd diagonal
         if(this.gameBoard[0][2].symbol == this.gameBoard[1][1].symbol && 
         this.gameBoard[1][1].symbol == this.gameBoard[2][0].symbol){
-            if (this.gameBoard[0][2].symbol == this.player)
+            let winner = this.gameBoard[0][2].symbol
+            if (showResult){
+                this.gameBoard[0][2].winner = true;
+                this.gameBoard[1][1].winner = true;
+                this.gameBoard[2][0].winner = true;
+                this.message = "Game over. The winner is " + winner + ". Press reset to play again";
+            }
+            if (winner == this.player)
                 return 10;
-            else if (this.gameBoard[0][2].symbol == this.opponent)
+            else if (winner == this.opponent)
                 return -10;
         }
         //No one has won, so return 0
+        if (showResult)
+            this.message = "Tie game. Press reset to play again";
         return 0;
     }
 
