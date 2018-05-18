@@ -1,4 +1,14 @@
-<mat-sidenav-container fullscreen>
+<!--Topbar-->
+<mat-toolbar color="primary">
+  <button (click)="sidenavOpened = !sidenavOpened" mat-icon-button>
+    <mat-icon>menu</mat-icon>
+  </button>
+  <div style="text-align: center; width: 100%;">
+    <h2>Saba K.</h2>
+  </div>
+</mat-toolbar>
+
+<mat-sidenav-container>
   
   <!-- Sidenav menu-->
   <mat-sidenav [mode]="width > MOBILE_SCREEN_SIZE ? 'side' : 'over'" [(opened)]="sidenavOpened">
@@ -10,17 +20,7 @@
 
   <!-- App content. Displayed through router outlet-->
   <mat-sidenav-content>
-    <!--Topbar-->
-    <mat-toolbar color="primary">
-      <button (click)="sidenavOpened = !sidenavOpened" mat-icon-button>
-        <mat-icon>menu</mat-icon>
-      </button>
-      <div style="text-align: center; width: 100%;">
-        <h2>Saba K.</h2>
-      </div>
-    </mat-toolbar>
-
-    <mat-card style="margin: 10px; height: 75vh">
+    <mat-card style="margin: 10px; min-height: 78vh">
         <router-outlet></router-outlet>
     </mat-card>
   </mat-sidenav-content>
