@@ -1,0 +1,17 @@
+<div *ngFor="let row of checkersBoard.board; let i = index" fxLayout="row">
+    <div 
+        (click)="tileClick(i,j)"
+        *ngFor="let position of row; let j = index"
+        [ngClass]="{'square': true, 'red-square': (i+j)%2 == 1, 'available-to-move': position.availableToMove}">
+        <img
+            (click) = "gamePieceClick(i, j)"
+            *ngIf="!position.isEmpty && position.color == 'red'" 
+            src="../assets/red-piece.svg" 
+            class="game-piece">
+        <img
+            (click) = "gamePieceClick(i, j)"
+            *ngIf="!position.isEmpty && position.color == 'black'" 
+            src="../assets/black-piece.svg" 
+            class="game-piece">
+    </div>
+</div>

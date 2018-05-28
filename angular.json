@@ -77,7 +77,11 @@
             ],
             "assets": [
               "src/assets",
-              "src/favicon.ico"
+              "src/favicon.ico",
+              "./src/assets/black-piece-king.svg",
+              "./src/assets/black-piece.svg",
+              "./src/assets/red-piece-king.svg",
+              "./src/assets/red-piece-king.svg"
             ]
           }
         },
