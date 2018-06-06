@@ -9,9 +9,13 @@ import { CheckersService } from '../../services/checkers/checkers.service';
 
 export class CheckersComponent implements OnInit {
 
+    activePlayer: any;
+
     constructor(private _checkersService: CheckersService) { }
 
-    ngOnInit() {  }
+    ngOnInit() { 
+        this.activePlayer = this._checkersService.activePlayer;
+    }
 
     getAllTiles(row: number, col: number){
         return this._checkersService.getAllTiles();
