@@ -4,18 +4,18 @@
     <p>It is {{_checkersService.activePlayer}}'s turn</p>
 </header>
 
-<div *ngFor="let row of _checkersService.getAllTiles(); let i = index" fxLayout="row">
+<div *ngFor="let row of getAllTiles(); let i = index" fxLayout="row">
     <div 
-        (click)="_checkersService.moveTo(i,j)"
+        (click)="moveTo(i,j)"
         *ngFor="let tile of row; let j = index"
         [ngClass]="{'square': true, 'red-square': (i+j)%2 == 1, 'available-to-move': tile.availableToMove, 'can-be-moved': tile.canBeMoved}">
         <img
-            (click) = "_checkersService.gamePieceClick(i, j)"
+            (click) = "gamePieceClick(i, j)"
             *ngIf="!tile.isEmpty && tile.color == 'red'" 
             src="../assets/red-piece.svg" 
             class="game-piece">
         <img
-            (click) = "_checkersService.gamePieceClick(i, j)"
+            (click) = "gamePieceClick(i, j)"
             *ngIf="!tile.isEmpty && tile.color == 'black'" 
             src="../assets/black-piece.svg" 
             class="game-piece">

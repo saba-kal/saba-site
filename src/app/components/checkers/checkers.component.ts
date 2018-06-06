@@ -13,4 +13,16 @@ export class CheckersComponent implements OnInit {
 
     ngOnInit() {  }
 
+    getAllTiles(row: number, col: number){
+        return this._checkersService.getAllTiles();
+    }
+
+    moveTo(row: number, col: number){
+        this._checkersService.moveTo(row, col);
+    }
+
+    gamePieceClick(row: number, col: number){
+        this._checkersService.gamePieceClick(row, col);
+    }
+
 }
