@@ -17,7 +17,7 @@ export class CheckersComponent implements OnInit {
         this.activePlayer = this._checkersService.activePlayer;
     }
 
-    getAllTiles(row: number, col: number){
+    getAllTiles(){
         return this._checkersService.getAllTiles();
     }
 
