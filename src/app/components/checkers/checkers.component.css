@@ -9,10 +9,16 @@
 
 .available-to-move{
     background-color: yellow;
+    cursor: pointer;
+}
+
+.can-be-moved {
+    outline: solid green;
+    outline-offset: -2px;
+    cursor: pointer;
 }
 
 .game-piece{
     margin-top: 5px;
     margin-left: 5px;
-    cursor: pointer;
 }

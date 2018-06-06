@@ -1,16 +1,22 @@
-<div *ngFor="let row of checkersBoard.board; let i = index" fxLayout="row">
+<header style="text-align: center">
+    <h3>Checkers</h3>
+    <p>WORK IN PROGRESS</p>
+    <p>It is {{_checkersService.activePlayer}}'s turn</p>
+</header>
+
+<div *ngFor="let row of _checkersService.getAllTiles(); let i = index" fxLayout="row">
     <div 
-        (click)="tileClick(i,j)"
-        *ngFor="let position of row; let j = index"
-        [ngClass]="{'square': true, 'red-square': (i+j)%2 == 1, 'available-to-move': position.availableToMove}">
+        (click)="_checkersService.moveTo(i,j)"
+        *ngFor="let tile of row; let j = index"
+        [ngClass]="{'square': true, 'red-square': (i+j)%2 == 1, 'available-to-move': tile.availableToMove, 'can-be-moved': tile.canBeMoved}">
         <img
-            (click) = "gamePieceClick(i, j)"
-            *ngIf="!position.isEmpty && position.color == 'red'" 
+            (click) = "_checkersService.gamePieceClick(i, j)"
+            *ngIf="!tile.isEmpty && tile.color == 'red'" 
             src="../assets/red-piece.svg" 
             class="game-piece">
         <img
-            (click) = "gamePieceClick(i, j)"
-            *ngIf="!position.isEmpty && position.color == 'black'" 
+            (click) = "_checkersService.gamePieceClick(i, j)"
+            *ngIf="!tile.isEmpty && tile.color == 'black'" 
             src="../assets/black-piece.svg" 
             class="game-piece">
     </div>

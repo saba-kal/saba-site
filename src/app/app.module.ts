@@ -5,6 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 //Services
 import { TicTacToeService } from './services/tic-tac-toe.service';
+import { CheckersService } from './services/checkers/checkers.service';
 
 //Base component
 import { AppComponent } from './app.component';
@@ -28,7 +29,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     FlexLayoutModule
   ],
   providers: [
-    TicTacToeService
+    TicTacToeService,
+    CheckersService
   ],
   bootstrap: [AppComponent]
 })
