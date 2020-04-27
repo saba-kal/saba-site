@@ -1,6 +1,11 @@
-# PersonalSite
+# SabaSite
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.3.
+
+# Deployment
+
+This project was deployed to Github Pages. You can visit it [here](https://saba-kal.github.io/saba-site/about).
+You can read more about deploying to Github Pages [here](https://alligator.io/angular/deploying-angular-app-github-pages/)
 
 ## Development server
 
@@ -12,7 +17,7 @@ Run `ng generate component component-name` to generate a new component. You can 
 
 ## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
 
 ## Running unit tests
 
