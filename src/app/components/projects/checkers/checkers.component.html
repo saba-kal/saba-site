@@ -1,0 +1,25 @@
+<div class="header">
+	<h2>CHECKERS</h2>
+	<p style="margin-left: auto;">(Work in progress)</p>
+</div>
+
+<p>
+	A checkers game built in TypeScript. Features such as multiple takes, king pieces, and AI opponent have not been
+	implemented yet
+</p>
+
+
+<div class="content">
+	<p>It is {{activePlayer}}'s turn</p>
+	<div class="board">
+		<div *ngFor="let row of getAllTiles(); let i = index" class="row">
+			<div (click)="moveTo(i,j)" *ngFor="let tile of row; let j = index"
+				[ngClass]="{'square': true, 'red-square': (i+j)%2 == 1, 'available-to-move': tile.availableToMove, 'can-be-moved': tile.canBeMoved}">
+				<img (click)="gamePieceClick(i, j)" *ngIf="!tile.isEmpty && tile.color == 'red'"
+					src="./assets/red-piece.svg" class="game-piece">
+				<img (click)="gamePieceClick(i, j)" *ngIf="!tile.isEmpty && tile.color == 'black'"
+					src="./assets/black-piece.svg" class="game-piece">
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,46 @@
+.content{
+	display: flex;
+	flex-direction: column;
+}
+.board-container{
+	display: flex;
+	justify-content: center;
+}
+.game-board{
+	display: flex;
+	flex-direction: column;
+	height: 200px;
+	width: 200px;
+	outline: 8px solid #000000;
+	outline-offset: -5px;
+}
+.game-board-row{
+	display: flex;
+	flex-direction: row;
+	flex-basis: 100%;
+}
+.grid-cell{
+	border:1px solid #ffffff;
+	cursor: pointer;
+	flex-basis: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.grid-cell:hover:not(.winning-cell){
+	background-color: rgb(224, 224, 224);
+}
+.grid-cell:active:not(.winning-cell){
+	background-color: rgb(189, 189, 189);
+}
+.winning-cell{
+	background-color: goldenrod;
+}
+.game-icon{
+	font-size: 30pt;
+}
+.block-grid {
+	position: absolute;
+	height: 200px;
+	width: 200px; 
+}
