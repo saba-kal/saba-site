@@ -1,0 +1,19 @@
+<div class="header-container">
+
+  <div class="title-container">
+    <h1 class="title">SABA KALANDADZE</h1>
+    <div class="sub-title">Software Developer <b>·</b> Student <b>·</b> Aspiring Game Designer</div>
+  </div>
+  
+  <div class="navigation-bar">
+    <a class="navigation-bar-item" [routerLink]="['/about']" routerLinkActive="active">ABOUT</a>
+    <a class="navigation-bar-item" [routerLink]="['/projects']" routerLinkActive="active">PROJECTS</a>
+    <a class="navigation-bar-item" [routerLink]="['/unity']" routerLinkActive="active">UNITY</a>
+  </div>
+</div>
+
+<div class="content-container">
+  <div class="content">
+    <router-outlet></router-outlet>
+  </div>
+</div>
