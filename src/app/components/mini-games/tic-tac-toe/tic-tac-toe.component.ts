@@ -4,7 +4,7 @@ import { GridCell, GameSymbol, TicTacToeService } from 'src/app/services/tic-tac
 @Component({
 	selector: 'tic-tac-toe',
 	templateUrl: 'tic-tac-toe.component.html',
-	styleUrls: ['tic-tac-toe.component.css']
+	styleUrls: ['tic-tac-toe.component.scss']
 })
 
 export class TicTacToeComponent implements OnInit {

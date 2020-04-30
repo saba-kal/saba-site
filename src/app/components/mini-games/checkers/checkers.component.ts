@@ -4,7 +4,7 @@ import { CheckersService } from 'src/app/services/checkers.service';
 @Component({
 	selector: 'checkers',
 	templateUrl: 'checkers.component.html',
-	styleUrls: ['checkers.component.css']
+	styleUrls: ['checkers.component.scss']
 })
 
 export class CheckersComponent implements OnInit {

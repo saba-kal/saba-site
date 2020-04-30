@@ -1,5 +1,14 @@
-<div class="header-container">
-	<div class="header">
+<header class="header">
+
+	<div class="header-bar">
+		<div class="icons">
+			<a href="https://github.com/saba-kal" target="_blank">
+				<fa-icon [icon]="faGithub"></fa-icon>
+			</a>
+		</div>
+	</div>
+
+	<div class="header-content">
 		<div class="title-container">
 			<h1 class="title">SABA KALANDADZE</h1>
 			<div class="sub-title">Student <b>·</b> Web Developer <b>·</b> Hobbyist Game Developer</div>
@@ -7,15 +16,17 @@
 
 		<div class="navigation-bar">
 			<a class="navigation-bar-item" [routerLink]="['/about']" routerLinkActive="active">ABOUT</a>
-			<a class="navigation-bar-item" [routerLink]="['/projects']" routerLinkActive="active">PROJECTS</a>
+			<a class="navigation-bar-item" [routerLink]="['/mini-games']" routerLinkActive="active">MINI-GAMES</a>
 			<a class="navigation-bar-item" [routerLink]="['/unity']" routerLinkActive="active">UNITY</a>
 		</div>
 	</div>
 
-	<div class="icons">
-		<fa-icon [icon]="faGithub"></fa-icon>
-	</div>
-</div>
-<div class="content">
-	<router-outlet></router-outlet>
+</header>
+
+<div class="content-container">
+
+	<main class="content">
+		<router-outlet></router-outlet>
+	</main>
+
 </div>
