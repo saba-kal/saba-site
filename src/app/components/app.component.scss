@@ -1,3 +1,5 @@
+@import 'src/theme.scss';
+
 .header-content{
 	display: flex;
 	align-items: center;
@@ -20,22 +22,27 @@
 
 .header-bar{
 	position: absolute;
-	justify-content: right;
-	background-color: #222;
+	justify-content: flex-end;
+	background-color: $header-color;
 	width: 100%;
 	z-index: 1;
 }
 
 .icons{
-	margin-right: 10px;
-	margin-top: 10px;
+	margin: 10px;
 	position: relative;
 	z-index: 2;
+	font-size: 14pt;
 }
 
 .icons a {
+	margin-left: 5px;
+	margin-right: 5px;
 	color: inherit;
 	text-decoration: inherit;
+}
+.icons a:hover {
+	color: $active-color;
 }
 
 .title-container{
@@ -55,11 +62,14 @@
 	justify-content: center;
 }
 
-.navigation-bar-item{
-	padding: 0px 10px 0px 10px;
-	margin: 0px 10px 0px 10px;
+.nav-bar-item {
+	color: $text-color;
+	text-transform: uppercase;
 	text-decoration: none;
-	color: inherit;
+	letter-spacing: 0.15em;
+	margin-left: 20px;
+	margin-right: 20px;
+	text-align: center;
 }
 
 .content-container {

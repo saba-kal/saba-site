@@ -1,3 +1,5 @@
+@import 'src/theme.scss';
+
 .content{
 	display: flex;
 	flex-direction: column;
@@ -11,7 +13,7 @@
 	flex-direction: column;
 	height: 200px;
 	width: 200px;
-	outline: 8px solid #000000;
+	outline: 8px solid $background-color;
 	outline-offset: -5px;
 }
 .game-board-row{
@@ -20,7 +22,7 @@
 	flex-basis: 100%;
 }
 .grid-cell{
-	border:1px solid #ffffff;
+	border:1px solid $text-color;
 	cursor: pointer;
 	flex-basis: 100%;
 	display: flex;
@@ -28,7 +30,7 @@
 	justify-content: center;
 }
 .grid-cell:hover:not(.winning-cell){
-	background-color: rgb(224, 224, 224);
+	background-color: $active-color;
 }
 .grid-cell:active:not(.winning-cell){
 	background-color: rgb(189, 189, 189);
@@ -43,4 +45,9 @@
 	position: absolute;
 	height: 200px;
 	width: 200px; 
+}
+.reset-button {
+	text-align: center;
+	margin-top: 20px;
+	margin-bottom: 20px;
 }

@@ -1,4 +1,4 @@
-@import 'src/assets/dark-theme.scss';
+@import 'src/theme.scss';
 
 body {
 	background-color: $background-color;
@@ -10,4 +10,53 @@ body {
 h1, h2 {
 	font-weight: lighter;
 	letter-spacing: 2px;
+	text-transform: uppercase;
+}
+
+a {
+	color: $active-color;
+	text-decoration: none;
+}
+
+button {
+	color: $text-color;
+	background-color: $active-color;
+	border: none;
+	padding: 10px 25px;
+	cursor: pointer;
+	font-size: 12pt;
+	border-radius: 5px;
+}
+button:hover {
+	opacity: 0.9;
+}
+button:active {
+	position:relative;
+	top:1px;
+}
+
+img {
+	width: 100%;
+}
+
+// Reference for animated underline: https://codepen.io/jstn/pen/zuDst
+.animated-underline {
+	padding-bottom: 5px;
+	position: relative;
+}
+.animated-underline:after {
+	background: none repeat scroll 0 0 transparent;
+	bottom: 0;
+	content: "";
+	display: block;
+	height: 2px;
+	left: 50%;
+	position: absolute;
+	background: $text-color;
+	transition: width 0.3s ease 0s, left 0.3s ease 0s;
+	width: 0;
+}
+.animated-underline:hover:after {
+	width: 100%;
+	left: 0;
 }

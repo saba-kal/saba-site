@@ -1,5 +1,5 @@
-import { Component, Inject } from '@angular/core';
-import { faGithub } from '@fortawesome/free-brands-svg-icons';
+import { Component } from '@angular/core';
+import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 
 @Component({
 	selector: 'app-root',
@@ -7,6 +7,7 @@ import { faGithub } from '@fortawesome/free-brands-svg-icons';
 	styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-	title = 'personal-site';
+
 	faGithub = faGithub;
+	faLinkedin = faLinkedin;
 }
