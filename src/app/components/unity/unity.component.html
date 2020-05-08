@@ -1,9 +1,48 @@
+<div class="info-italics">The source code for everything below can be found on my Github page.</div>
+
+<h2>Camera Control</h2>
+<div>
+	I implemented a custom camera controller that allows mouse rotation and zooming. In addition, it can
+	detect collision and move the camera to avoid clipping with the surroundings.
+</div>
+<br>
+<img src="./assets/unity/camera-control-demo1.gif" alt="Unity camera controller zoom demo.">
+<img src="./assets/unity/camera-control-demo2.gif" alt="Unity camera controller collision demo.">
+<br>
+<br>
+
 <h2>Procedural Animation</h2>
 
 <div>
-	Below are my attempts to create procedurally animated robots in Unity.
-	I use inverse kinematics to guide the end effector of each limb to a target position.
-	This results in somewhat naturally looking movement.
+	Below are my attempts to create a procedurally animated robot in Unity.
 </div>
-
-<img src="./assets/unity/proc-animation-demo1.gif" alt="Spider robot procedural animation demo">
+<br>
+<img src="./assets/unity/proc-animation-demo2.gif" alt="Spider robot procedural animation demo 2">
+<div>
+	The key to procedural animation is inverse kinematics. In animation and robotics, this term means the mathematical
+	process of calculating how each joint should be rotated to reach a specific target. The legs of the robot use
+	a unity asset called
+	<a href="https://assetstore.unity.com/packages/tools/animation/fast-ik-139972" target="_blank">Fast IK</a>,
+	while the turret arm uses a custom inverse kinematics manager.
+</div>
+<br>
+<img src="./assets/unity/proc-animation-demo3.gif" alt="Spider robot procedural animation demo 3">
+<div>
+	Once inverse kinematics are implemented, procedural animation is simple. You just need to move
+	the target to where you want each limb to go to. For example, the legs follow targets that periodically
+	make arc shaped jumps.
+</div>
+<br>
+<img src="./assets/unity/proc-animation-demo4.gif" alt="Spider robot procedural animation demo 4">
+<div>
+	As mentioned above, the turret arm uses custom-made inverse kinematics. The implementation
+	is based on
+	<a href="https://www.alanzucconi.com/2017/04/17/procedural-animations/" target="_blank">this tutorial</a>.
+	Unlike
+	<a href="https://assetstore.unity.com/packages/tools/animation/fast-ik-139972" target="_blank">Fast IK</a>,
+	this implementation allows limiting rotation to a single axis on each joint. Unfortunately, the solution
+	for it becomes a lot more complicated as a result. Here, I use the gradient of the rotation function
+	for each joint to determine whether I am moving closer to the target or further. This has one big issue:
+	the IK function can get stuck at a local minima.
+</div>
+<br>

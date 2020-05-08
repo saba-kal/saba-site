@@ -16,9 +16,9 @@
 			<div (click)="moveTo(i,j)" *ngFor="let tile of row; let j = index"
 				[ngClass]="{'square': true, 'red-square': (i+j)%2 == 1, 'available-to-move': tile.availableToMove, 'can-be-moved': tile.canBeMoved}">
 				<img (click)="gamePieceClick(i, j)" *ngIf="!tile.isEmpty && tile.color == 'red'"
-					src="./assets/red-piece.svg" class="game-piece">
+					src="./assets/checkers/red-piece.svg">
 				<img (click)="gamePieceClick(i, j)" *ngIf="!tile.isEmpty && tile.color == 'black'"
-					src="./assets/black-piece.svg" class="game-piece">
+					src="./assets/checkers/black-piece.svg">
 			</div>
 		</div>
 	</div>

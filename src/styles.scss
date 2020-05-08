@@ -13,11 +13,6 @@ h1, h2 {
 	text-transform: uppercase;
 }
 
-a {
-	color: $active-color;
-	text-decoration: none;
-}
-
 button {
 	color: $text-color;
 	background-color: $active-color;
@@ -40,11 +35,13 @@ img {
 }
 
 // Reference for animated underline: https://codepen.io/jstn/pen/zuDst
-.animated-underline {
+a {
 	padding-bottom: 5px;
 	position: relative;
+	color: $active-color;
+	text-decoration: none;
 }
-.animated-underline:after {
+a:after {
 	background: none repeat scroll 0 0 transparent;
 	bottom: 0;
 	content: "";
@@ -56,7 +53,7 @@ img {
 	transition: width 0.3s ease 0s, left 0.3s ease 0s;
 	width: 0;
 }
-.animated-underline:hover:after {
+a:hover:after {
 	width: 100%;
 	left: 0;
 }
