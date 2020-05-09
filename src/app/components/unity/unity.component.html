@@ -1,5 +1,3 @@
-<div class="info-italics">The source code for everything below can be found on my Github page.</div>
-
 <h2>Camera Control</h2>
 <div>
 	I implemented a custom camera controller that allows mouse rotation and zooming. In addition, it can
@@ -42,7 +40,8 @@
 	<a href="https://assetstore.unity.com/packages/tools/animation/fast-ik-139972" target="_blank">Fast IK</a>,
 	this implementation allows limiting rotation to a single axis on each joint. Unfortunately, the solution
 	for it becomes a lot more complicated as a result. Here, I use the gradient of the rotation function
-	for each joint to determine whether I am moving closer to the target or further. This has one big issue:
-	the IK function can get stuck at a local minima.
+	for each joint to determine whether I am moving closer or further from the target. This has one big issue:
+	the IK function can get stuck at a local minima. Limiting how much each joint can rotate can mitigate
+	this problem. However, a better solution is to not use simple function gradients to find a minima.
 </div>
 <br>

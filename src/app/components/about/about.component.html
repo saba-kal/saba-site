@@ -6,3 +6,23 @@
 	It was built using Angular V9 and the source for it can be found
 	<a href="https://github.com/saba-kal/saba-site" target="_blank">here</a>.
 </div>
+
+<h2>Skills</h2>
+<div class="skills-content">
+	<div *ngFor="let skill of skills; let isLast=last">
+		{{skill}} <b *ngIf='!isLast'>·</b>&nbsp;
+	</div>
+</div>
+
+<h2>Experience</h2>
+<div *ngFor="let experience of experiences">
+	<div class="experience-item-header">
+		<b class="experience-item-company">{{experience.company}}, {{experience.role}}</b>
+		<b class="experience-item-date">{{experience.date}}</b>
+	</div>
+	<ul>
+		<li *ngFor="let descItem of experience.description">
+			{{descItem}}
+		</li>
+	</ul>
+</div>

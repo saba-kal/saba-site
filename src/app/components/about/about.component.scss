@@ -1,0 +1,26 @@
+.experience-item-header{
+	display: flex;
+	font-style: bold;
+}
+
+.experience-item-company{
+	min-width: 400px;
+	text-align: left;
+}
+.experience-item-date{
+	width: 100%;
+	text-align: right;
+}
+.skills-content{
+	display: flex;
+	flex-wrap: wrap;
+}
+
+@media screen and (max-width: 620px) {
+	.experience-item-header{
+		flex-direction: column;
+	}
+	.experience-item-date{
+		text-align: left;
+	}
+}
