@@ -1,11 +1,18 @@
 <h2>Camera Control</h2>
 <div>
-	I implemented a custom camera controller that allows mouse rotation and zooming. In addition, it can
-	detect collision and move the camera to avoid clipping with the surroundings.
+	There are many existing camera controllers available for Unity, most of which are 3rd-party assets.
+	I wanted to implement a custom solution so that I could learn how they work and not have to rely on outside tools.
+	Below is a demonstration of zooming, rotation, and collision detection capabilities of my camera controller.
+</div>
+<div>
+	Link to the source code:
+	<a href="https://github.com/saba-kal/unity-demos" target="_blank">https://github.com/saba-kal/unity-demos</a>.
 </div>
 <br>
-<img src="./assets/unity/camera-control-demo1.gif" alt="Unity camera controller zoom demo.">
-<img src="./assets/unity/camera-control-demo2.gif" alt="Unity camera controller collision demo.">
+<image-loader source="./assets/unity/camera-control-demo1.gif" alt="Unity camera controller zoom demo.">
+</image-loader>
+<image-loader source="./assets/unity/camera-control-demo2.gif" alt="Unity camera controller collision demo.">
+</image-loader>
 <br>
 <br>
 
@@ -14,8 +21,13 @@
 <div>
 	Below are my attempts to create a procedurally animated robot in Unity.
 </div>
+<div>
+	Link to the source code:
+	<a href="https://github.com/saba-kal/unity-demos" target="_blank">https://github.com/saba-kal/unity-demos</a>.
+</div>
 <br>
-<img src="./assets/unity/proc-animation-demo2.gif" alt="Spider robot procedural animation demo 2">
+<image-loader source="./assets/unity/proc-animation-demo2.gif" alt="Spider robot procedural animation demo 2">
+</image-loader>
 <div>
 	The key to procedural animation is inverse kinematics. In animation and robotics, this term means the mathematical
 	process of calculating how each joint should be rotated to reach a specific target. The legs of the robot use
@@ -24,14 +36,16 @@
 	while the turret arm uses a custom inverse kinematics manager.
 </div>
 <br>
-<img src="./assets/unity/proc-animation-demo3.gif" alt="Spider robot procedural animation demo 3">
+<image-loader source="./assets/unity/proc-animation-demo3.gif" alt="Spider robot procedural animation demo 3">
+</image-loader>
 <div>
 	Once inverse kinematics are implemented, procedural animation is simple. You just need to move
 	the target to where you want each limb to go to. For example, the legs follow targets that periodically
 	make arc shaped jumps.
 </div>
 <br>
-<img src="./assets/unity/proc-animation-demo4.gif" alt="Spider robot procedural animation demo 4">
+<image-loader source="./assets/unity/proc-animation-demo4.gif" alt="Spider robot procedural animation demo 4">
+</image-loader>
 <div>
 	As mentioned above, the turret arm uses custom-made inverse kinematics. The implementation
 	is based on
@@ -39,9 +53,24 @@
 	Unlike
 	<a href="https://assetstore.unity.com/packages/tools/animation/fast-ik-139972" target="_blank">Fast IK</a>,
 	this implementation allows limiting rotation to a single axis on each joint. Unfortunately, the solution
-	for it becomes a lot more complicated as a result. Here, I use the gradient of the rotation function
-	for each joint to determine whether I am moving closer or further from the target. This has one big issue:
-	the IK function can get stuck at a local minima. Limiting how much each joint can rotate can mitigate
-	this problem. However, a better solution is to not use simple function gradients to find a minima.
+	for it becomes a lot more complicated as a result. For the purpose of this demo, I used the gradient of
+	the rotation function for each joint to determine whether I was moving closer or further from the target.
+	This has one big issue:
+	the IK function can get stuck at a local minima. To mitigate this issue, you can limit how much each joint
+	can rotate. However, a better solution is to not use simple gradients to find a minima.
+	Something like <a href="https://en.wikipedia.org/wiki/Newton%27s_method" target="_blank">Newton's method</a>
+	is better suited and commonly used in IK implementations.
 </div>
+<br>
+
+<h2>Sky Pirates (in progress)</h2>
+<div>
+	Sky Pirates is a 2D side-scrolling bullet hell game that was built for a school project.
+	All art and animation was done by a group-mate while the coding was mostly handled by me.
+	You can play an early alpha build on
+	<a href="https://sabathellama.itch.io/sky-pirates" target="_blank">my itch.io page</a>.
+</div>
+<br>
+<image-loader source="./assets/unity/sky-pirates-alpha-v4.gif" alt="Sky Pirates game demo.">
+</image-loader>
 <br>

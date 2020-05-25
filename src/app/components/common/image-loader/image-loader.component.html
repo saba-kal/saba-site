@@ -1,0 +1,5 @@
+<img [ngStyle]="{'display':isLoaded ? '' : 'none'}" [src]="source" [alt]="alt" (load)="onImageLoad()">
+
+<div class="loading-animation-container" *ngIf="!isLoaded">
+	<img class="loading-animation" [src]="loadingAnimationSrc" alt="loading...">
+</div>

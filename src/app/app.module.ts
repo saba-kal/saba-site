@@ -14,6 +14,7 @@ import { MiniGamesComponent } from './components/mini-games/mini-games.component
 import { UnityComponent } from './components/unity/unity.component';
 import { TicTacToeComponent } from './components/mini-games/tic-tac-toe/tic-tac-toe.component';
 import { CheckersComponent } from './components/mini-games/checkers/checkers.component';
+import { ImageLoaderComponent } from './components/common/image-loader/image-loader.component';
 
 @NgModule({
 	declarations: [
@@ -22,7 +23,8 @@ import { CheckersComponent } from './components/mini-games/checkers/checkers.com
 		MiniGamesComponent,
 		UnityComponent,
 		TicTacToeComponent,
-		CheckersComponent
+		CheckersComponent,
+		ImageLoaderComponent
 	],
 	imports: [
 		BrowserModule,
